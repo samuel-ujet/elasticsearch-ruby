@@ -46,9 +46,10 @@ module Elasticsearch
 
       XPACK_ENDPOINTS = [
         'autoscaling', 'cross_cluster_replication', 'ccr', 'data_frame_transform_deprecated',
-        'enrich', 'eql', 'fleet', 'ilm', 'logstash', 'migration', 'watcher', 'slm'
+        'enrich', 'eql', 'fleet', 'ilm', 'logstash', 'migration', 'watcher', 'slm',
+        'open_point_in_time', 'close_point_in_time'
       ]
-      XPACK_ENDPOINTS_REGEXP = /data_stream|ml_|reload_search_analyzers|transform/
+      XPACK_ENDPOINTS_REGEXP = /data_stream|ml_|reload_search_analyzers|transform|freeze|unfreeze/
 
       def self.xpack_files
         xpack_tests = Dir.entries(TESTS_DIRECTORIES[:xpack])
