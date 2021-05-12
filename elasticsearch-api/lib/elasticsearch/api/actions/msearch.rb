@@ -44,7 +44,7 @@ module Elasticsearch
                    "#{Utils.__listify(_index)}/_msearch"
                  else
                    "_msearch"
-  end
+                 end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]
@@ -61,13 +61,11 @@ module Elasticsearch
                     end
                     .map { |item| Elasticsearch::API.serializer.dump(item) }
           payload << "" unless payload.empty?
-          payload = payload.join("
-")
+          payload = payload.join("\n")
         when body.is_a?(Array)
           payload = body.map { |d| d.is_a?(String) ? d : Elasticsearch::API.serializer.dump(d) }
           payload << "" unless payload.empty?
-          payload = payload.join("
-")
+          payload = payload.join("\n")
         else
           payload = body
       end
@@ -80,6 +78,7 @@ module Elasticsearch
       # @since 6.2.0
       ParamsRegistry.register(:msearch, [
         :search_type,
+        :ignore_unavailable,
         :max_concurrent_searches,
         :typed_keys,
         :pre_filter_shard_size,
